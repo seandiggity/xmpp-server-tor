@@ -29,12 +29,16 @@ if ! grep -q "deb.torproject.org/torproject.org" /etc/apt/sources.list; then
 fi
 
 # Add the official Prosody repository
-if ! grep -q "packages.prosody.im/debian" /etc/apt/sources.list; then
-    echo "== Adding the official Prosody repository"
-    echo "deb https://packages.prosody.im/debian bookworm main" >> /etc/apt/sources.list
-    wget https://prosody.im/files/prosody-debian-packages.key -O- | sudo apt-key add -
-    apt-get update
-fi
+#if ! grep -q "packages.prosody.im/debian" /etc/apt/sources.list; then
+#    echo "== Adding the official Prosody repository"
+#    echo "deb https://packages.prosody.im/debian bookworm main" >> /etc/apt/sources.list
+#    wget https://prosody.im/files/prosody-debian-packages.key -O- | sudo apt-key add -
+#    apt-get update
+#fi
+echo "== Adding Prosody via Debian extrepo"
+apt install extrepo
+extrepo enable prosody
+apt-get update
 
 # Install prosody and tor, plus related packages
 echo "== Installing Prosody and Tor"
