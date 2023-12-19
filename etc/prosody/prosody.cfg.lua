@@ -43,7 +43,7 @@ modules_enabled = {
 
         -- Not essential, but recommended
                 "private"; -- Private XML storage (for room bookmarks, etc.)
-                "vcard"; -- Allow users to set vCards
+                --"vcard"; -- Allow users to set vCards
 
         -- These are commented by default as they have a performance impact
                 --"privacy"; -- Support privacy lists
@@ -51,14 +51,14 @@ modules_enabled = {
 
         -- Nice to have
                 -- "version"; -- Replies to server version requests
-                "uptime"; -- Report how long server has been running
-                "time"; -- Let others know the time here on this server
-                "ping"; -- Replies to XMPP pings with pongs
-                "pep"; -- Enables users to publish their mood, activity, playing music and more
-                "register"; -- Allow users to register on this server using a client and change passwords
+                --"uptime"; -- Report how long server has been running
+                --"time"; -- Let others know the time here on this server
+                --"ping"; -- Replies to XMPP pings with pongs
+                --"pep"; -- Enables users to publish their mood, activity, playing music and more
+                --"register"; -- Allow users to register on this server using a client and change passwords
 
         -- Admin interfaces
-                "admin_adhoc"; -- Allows administration via an XMPP client that supports ad-hoc commands
+                --"admin_adhoc"; -- Allows administration via an XMPP client that supports ad-hoc commands
                 --"admin_telnet"; -- Opens telnet console interface on localhost port 5582
 
         -- HTTP modules
@@ -69,7 +69,7 @@ modules_enabled = {
                 --"groups"; -- Shared roster support
                 --"announce"; -- Send announcement to all online users
                 --"welcome"; -- Welcome users who register accounts
-                --"watchregistrations"; -- Alert admins of registrations
+                "watchregistrations"; -- Alert admins of registrations
                 --"motd"; -- Send a message to users when they log in
                 --"legacyauth"; -- Legacy authentication. Only used by some old clients and bots.
 };
@@ -169,17 +169,15 @@ authentication = "internal_hashed"
 VirtualHost "localhost"
 
 VirtualHost "example.org"
-
-VirtualHost "example.com"
-        enabled = false -- Remove this line to enable this host
+        enabled = true -- Remove this line to enable this host
 
         -- Assign this host a certificate for TLS, otherwise it would use the one
         -- set in the global section (if any).
         -- Note that old-style SSL on port 5223 only supports one certificate, and will always
         -- use the global one.
         ssl = {
-                key = "/etc/prosody/certs/example.com.key";
-                certificate = "/etc/prosody/certs/example.com.crt";
+                key = "/etc/prosody/certs/xmpp.key";
+                certificate = "/etc/prosody/xmpp.crt";
         }
 
 ------ Components ------
@@ -201,4 +199,3 @@ VirtualHost "example.com"
 --
 --Component "gateway.example.com"
 --      component_secret = "password"
-
