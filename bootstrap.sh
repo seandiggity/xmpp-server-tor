@@ -80,9 +80,6 @@ sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 apparmor=1 secu
 update-grub
 cp $PWD/etc/apparmor.d/usr.bin.prosody /etc/apparmor.d/usr.bin.prosody
 
-# Install tlsdate
-apt-get install -y tlsdate
-
 # Final instructions
 echo ""
 echo "== Try SSHing into this server again in a new window as well as connecting to XMPP, to confirm the firewall isn't broken"
