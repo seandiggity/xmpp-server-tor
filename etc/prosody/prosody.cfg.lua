@@ -89,8 +89,8 @@ allow_registration = false;
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
-        key = "/etc/prosody/certs/example.key";
-        certificate = "/etc/prosody/certs/example.crt";
+        key = "/etc/prosody/certs/xmpp.key";
+        certificate = "/etc/prosody/certs/xmpp.crt";
         dhparam = "/etc/prosody/certs/dhparam.pem";
         options = { "no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1", "cipher_server_preference"};
         ciphers = "HIGH+kEECDH:HIGH+kEDH:!PSK:!SRP:!3DES:!aNULL:!AES128:!CAMELLIA128:!SHA";
