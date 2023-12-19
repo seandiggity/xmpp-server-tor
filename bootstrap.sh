@@ -47,9 +47,14 @@ service tor stop
 service prosody stop
 
 # SSL/TLS prep for prosody
-openssl genrsa -out /etc/prosody/certs/xmpp.key 4096
-openssl req -new -key /etc/prosody/certs/xmpp.key -out /etc/prosody/certs/xmpp.crt
-openssl dhparam -out /etc/prosody/certs/dhparam.pem 4096
+# Generate self-signed certificate
+#openssl genrsa -out /etc/prosody/certs/xmpp.key 4096
+#openssl req -new -key /etc/prosody/certs/xmpp.key -out /etc/prosody/certs/xmpp.crt
+#openssl dhparam -out /etc/prosody/certs/dhparam.pem 4096
+# Use Let's Encrypt certificate authority for prosody
+apt-get install certbot
+certbot certonly --deploy-hook "prosodyctl --root cert import /etc/letsencrypt/live"
+echo -e "#!/bin/sh\n/usr/bin/prosodyctl --root cert import /etc/letsencrypt/live" >> /etc/letsencrypt/renewal-hooks/deploy/prosody.sh
 chown prosody:prosody /etc/prosody/certs/*
 chmod 600 /etc/prosody/certs/*
 
@@ -98,7 +103,8 @@ echo "== Try SSHing into this server again in a new window as well as connecting
 echo ""
 echo "== TO DO LIST:"
 echo ""
-echo "1. Run 'cat /etc/prosody/certs/xmpp.crt' and submit its contents to your friendly neighborhood Certificate Authority."
+echo "1. This script uses certbot and Let\'s Encrypt by default to generate SSL/TLS certificates. See: https://prosody.im/doc/letsencrypt"
+echo "If you used OpenSSL to generate certificates, run 'cat /etc/prosody/certs/xmpp.crt' and submit its contents to your friendly neighborhood Certificate Authority."
 echo ""
 echo "2. Configure DNS. Example (replace 'example.org' with your domain):"
 echo "SRV 	_xmpp-client._tcp 	3600 	10 	0 	5222 	example.org."
