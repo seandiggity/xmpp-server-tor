@@ -16,22 +16,22 @@ PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "== Updating software"
 apt-get --allow-releaseinfo-change update
 apt-get dist-upgrade -y
-
+apt-transport-https
 apt-get install -y
 
 # add official Tor repository
-if ! grep -q "http://deb.torproject.org/torproject.org" /etc/apt/sources.list; then
+if ! grep -q "deb.torproject.org/torproject.org" /etc/apt/sources.list; then
     echo "== Adding the official Tor repository"
-    echo "deb http://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list
-    gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
-    gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+    echo "deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list
+    wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
     apt-get update
+    apt-get install deb.torproject.org-keyring
 fi
 
 # Add the official Prosody repository
-if ! grep -q "deb http://packages.prosody.im/debian" /etc/apt/sources.list; then
+if ! grep -q "packages.prosody.im/debian" /etc/apt/sources.list; then
     echo "== Adding the official Prosody repository"
-    echo "deb http://packages.prosody.im/debian bookworm main" >> /etc/apt/sources.list
+    echo "deb https://packages.prosody.im/debian bookworm main" >> /etc/apt/sources.list
     wget https://prosody.im/files/prosody-debian-packages.key -O- | sudo apt-key add -
     apt-get update
 fi
