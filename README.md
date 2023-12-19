@@ -1,9 +1,9 @@
-Installation Script for XMPP Server With Tor Hidden Service
+Installation Script for XMPP Server With Tor Hidden Service and Off-the-Record Messaging
 ===================
 
-This script contains "Paranoid Prosody" settings for a Jabber/XMPP server configuration like OTR.im and is forked from https://github.com/NSAKEY/paranoid-prosody. It has been modified to force Prosody XMPP server to use strong SSL/TLS ciphers, disable logging, and some other "paranoid" things. It also sets up Tor to provide a hidden service for Prosody.
+This script contains "Paranoid Prosody" settings for a Jabber/XMPP server configuration like OTR.im and is forked from https://github.com/NSAKEY/paranoid-prosody. It has been modified to force Prosody XMPP server to use strong SSL/TLS ciphers, disable logging, add OTR, and some other "paranoid" things. It also sets up Tor to provide a hidden service for Prosody.
 
-This is a script to bootstrap a Debian server to be a set-and-forget Prosody server. It's been tested on Debian Bookworm and should work on any other maintained version of those two distros.
+This is a script to bootstrap a Debian server to be a set-and-forget Prosody server. It's been tested on Debian Bookworm and should work on any other maintained version (with minor tweaks for release and package names).
 
 This script performs the following tasks:
 
@@ -15,7 +15,7 @@ This script performs the following tasks:
 * Configures automatic updates
 * Gives instructions on what the sysadmin needs to manually do at the end
 
-To use it, set up a new Debian or Ubuntu server, SSH into it, switch to the root user, and:
+To use it, set up a new Debian server, SSH into it, switch to the root user, and:
 
 ```sh
 git clone https://github.com/seandiggity/xmpp-server-tor.git
