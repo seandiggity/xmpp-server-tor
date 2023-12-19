@@ -14,7 +14,7 @@ PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Update software
 echo "== Updating software"
-apt-get update
+apt-get --allow-releaseinfo-change update
 apt-get dist-upgrade -y
 
 apt-get install -y
