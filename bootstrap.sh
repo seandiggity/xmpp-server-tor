@@ -22,7 +22,7 @@ apt-get install -y
 # add official Tor repository
 if ! grep -q "deb.torproject.org/torproject.org" /etc/apt/sources.list; then
     echo "== Adding the official Tor repository"
-    echo "deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list
+    echo "deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org bookworm main" >> /etc/apt/sources.list
     wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
     apt-get update
     apt-get install deb.torproject.org-keyring
@@ -79,10 +79,18 @@ cp $PWD/etc/apt/apt.conf.d/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
 service unattended-upgrades restart
 
 # Install and configure apparmor
-apt-get install -y apparmor apparmor-profiles apparmor-utils
+apt-get install -y apparmor apparmor-profiles apparmor-utils grub
 sed -i.bak 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 apparmor=1 security=apparmor"/' /etc/default/grub
 update-grub
 cp $PWD/etc/apparmor.d/usr.bin.prosody /etc/apparmor.d/usr.bin.prosody
+
+# Install and config for apt-transport-tor
+systemctl start tor
+apt-get install apt-transport-tor
+sed -i 's|https://deb.torproject.org|tor://apow7mjfryruh65chtdydfmqfpj5btws7nbocgtaovhvezgccyjazpqd.onion|g' /etc/apt/sources.list
+apt-get update
+apt-get upgrade
+apt-get install --reinstall deb.torproject.org-keyring tor
 
 # Final instructions
 echo ""
