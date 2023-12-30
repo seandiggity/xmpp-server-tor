@@ -85,7 +85,7 @@ allow_registration = false;
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
-        key = "/etc/letsencrypt/live/example.org/privkey.key";
+        key = "/etc/letsencrypt/live/example.org/privkey.pem";
         certificate = "/etc/letsencrypt/live/example.org/fullchain.pem";
         dhparam = "/usr/lib/python3/dist-packages/certbot/ssl-dhparams.pem";
         options = { "no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1", "cipher_server_preference"};
@@ -172,7 +172,7 @@ VirtualHost "example.org"
         -- Note that old-style SSL on port 5223 only supports one certificate, and will always
         -- use the global one.
         ssl = {
-                key = "/etc/letsencrypt/live/example.org/privkey.key";
+                key = "/etc/letsencrypt/live/example.org/privkey.pem";
                 certificate = "/etc/letsencrypt/live/example.org/fullchain.pem";
         }
 
