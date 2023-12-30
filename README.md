@@ -13,6 +13,7 @@ This script performs the following tasks:
 * Installs and configures Tor to be a hidden service for Prosody (You can also manually edit torrc to make SSH an authenticated hidden service)
 * Configures sane default firewall rules
 * Configures automatic updates
+* Triggers Let's Encrypt certificate generation (You can skip if you want and create self-signed certs)
 * Gives instructions on what the sysadmin needs to manually do at the end
 
 To use it, set up a new Debian server, SSH into it, switch to the root user, and:
