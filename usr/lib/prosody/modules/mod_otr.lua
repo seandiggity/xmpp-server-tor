@@ -23,7 +23,7 @@ local st = require "util.stanza";
 --		mandatory: OTR will be enforced. MUC will not work.
 --		optional:  Warn user to suggest OTR. (default)
 --		mixed: OTR will be enforced in all but MUC.
-local policy = module:get_option_string("otr_policy", "optional");
+local policy = module:get_option_string("otr_policy", "mandatory");
 
 local mandatory;
 local mandatory_msg = "For security reasons, OTR encryption is required for conversations on this server";
