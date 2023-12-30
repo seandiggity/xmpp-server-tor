@@ -85,8 +85,8 @@ allow_registration = false;
 -- These are the SSL/TLS-related settings. If you don't want
 -- to use SSL/TLS, you may comment or remove this
 ssl = {
-        key = "/etc/letsencrypt/live/example.org/privkey.pem";
-        certificate = "/etc/letsencrypt/live/example.org/fullchain.pem";
+        key = "/etc/prosody/certs/example.org.key";
+        certificate = "/etc/prosody/certs/example.org.crt";
         dhparam = "/usr/lib/python3/dist-packages/certbot/ssl-dhparams.pem";
         options = { "no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1", "cipher_server_preference"};
         ciphers = "HIGH+kEECDH:HIGH+kEDH:!PSK:!SRP:!3DES:!aNULL:!AES128:!CAMELLIA128:!SHA";
@@ -162,7 +162,7 @@ authentication = "internal_hashed"
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
 -- Settings under each VirtualHost entry apply *only* to that host.
 
-VirtualHost "localhost"
+--VirtualHost "localhost"
 
 VirtualHost "example.org"
         enabled = true -- Remove this line to enable this host
@@ -172,8 +172,8 @@ VirtualHost "example.org"
         -- Note that old-style SSL on port 5223 only supports one certificate, and will always
         -- use the global one.
         ssl = {
-                key = "/etc/letsencrypt/live/example.org/privkey.pem";
-                certificate = "/etc/letsencrypt/live/example.org/fullchain.pem";
+                key = "/etc/prosody/certs/example.org.key";
+                certificate = "/etc/prosody/certs/example.org.crt";
         }
 
 ------ Components ------
