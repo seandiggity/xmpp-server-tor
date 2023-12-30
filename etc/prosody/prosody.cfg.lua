@@ -45,10 +45,6 @@ modules_enabled = {
                 "private"; -- Private XML storage (for room bookmarks, etc.)
                 --"vcard"; -- Allow users to set vCards
 
-        -- These are commented by default as they have a performance impact
-                --"privacy"; -- Support privacy lists
-                --"compression"; -- Stream compression (requires the lua-zlib package installed)
-
         -- Nice to have
                 -- "version"; -- Replies to server version requests
                 --"uptime"; -- Report how long server has been running
