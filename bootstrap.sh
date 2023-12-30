@@ -57,6 +57,7 @@ certbot certonly --deploy-hook "prosodyctl --root cert import /etc/letsencrypt/l
 echo -e "#!/bin/sh\n/usr/bin/prosodyctl --root cert import /etc/letsencrypt/live" >> /etc/letsencrypt/renewal-hooks/deploy/prosody.sh
 chown prosody:prosody /etc/prosody/certs/*
 chmod 600 /etc/prosody/certs/*
+certbot renew --deploy-hook "prosodyctl --root cert import /etc/letsencrypt/live"
 
 # Configure tor
 cp $PWD/etc/tor/torrc /etc/tor/torrc
