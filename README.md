@@ -23,3 +23,32 @@ git clone https://github.com/seandiggity/xmpp-server-tor.git
 cd xmpp-server-tor
 ./bootstrap.sh
 ```
+
+## After Installation
+* Try SSHing into this server again in a new window as well as connecting to XMPP, to confirm the firewall isn't broken.
+
+### TO DO List:
+1. This script uses `certbot` and Let's Encrypt by default to generate SSL/TLS certificates. See: https://prosody.im/doc/letsencrypt
+
+  * If you used OpenSSL to generate certificates, run `cat /etc/prosody/certs/xmpp.crt` and submit its contents to your friendly neighborhood Certificate Authority.
+
+2. Configure DNS. Example (replace `example.org` with your domain):
+
+```
+SRV 	_xmpp-client._tcp 	3600 	10 	0 	5222 	example.org.
+SRV 	_xmpp-server._tcp 	3600  	10 	0 	5269 	example.org.
+```
+
+3. Edit `/etc/prosody/prosody.cfg.lua` so that all cases of `example.org` are replaced with your domain.
+
+4. After you reboot, you can run `aa-enforce /etc/apparmor.d/usr.bin.prosody` to update apparmor rules.
+
+5. After the reboot, be sure to run `cat /var/lib/tor/xmpp/hostname` to get your Tor hidden service address.
+
+6. The option to allow SSH as an authenticated Tor hidden service has been supplied. Just read the comments in `/etc/tor/torrc`
+
+7. To create an account, run `prosodyctl adduser user@example.org` See: https://prosody.im/doc/creating_accounts
+
+8. It is recommended to use a XMPP client like CoyIM to connect via OTR and Tor. See: https://coy.im
+
+* Remember to reboot the server after you've made changes.
