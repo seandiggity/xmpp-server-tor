@@ -126,4 +126,8 @@ echo "5. After the reboot, be sure to run 'cat /var/lib/tor/xmpp/hostname' to ge
 echo ""
 echo "6. The option to allow SSH as an authenticated hidden service has been supplied. Just read the comments in /etc/tor/torrc."
 echo ""
+echo "7. To create an account, run 'prosodyctl adduser user@example.org' See: https://prosody.im/doc/creating_accounts"
+echo ""
+echo "8. It is recommended to use a XMPP client like CoyIM to connect via OTR and Tor. See: https://coy.im"
+echo ""
 echo "== REBOOT THIS SERVER"
