@@ -65,12 +65,12 @@ cp $PWD/etc/tor/torrc /etc/tor/torrc
 
 # Configure prosody
 cp $PWD/etc/prosody/prosody.cfg.lua /etc/prosody/prosody.cfg.lua
-mkdir share
-mkdir share/lua
-mkdir share/lua/5.1
-mkdir share/lua/5.1/mod_otr
+mkdir /usr/share
+mkdir /usr/share/lua
+mkdir /usr/share/lua/5.1
+mkdir /usr/share/lua/5.1/mod_otr
 cp $PWD/usr/lib/prosody/modules/* /usr/lib/prosody/modules/
-cp $PWD/usr/lib/prosody/modules/mod_otr.lua /usr/lib/prosody/modules/share/lua/5.1/mod_otr/
+cp $PWD/usr/lib/prosody/modules/mod_otr.lua /usr/share/lua/5.1/mod_otr/
 
 # Configure firewall rules
 echo "== Configuring firewall rules"
